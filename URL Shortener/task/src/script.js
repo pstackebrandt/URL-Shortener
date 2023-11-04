@@ -1,5 +1,5 @@
 // file: script.js
-const debugShortener = true;
+const debugShortener = false;
 
 /**
  * Starts the creation of a short URL from a common URL and lists it on the page.
@@ -39,7 +39,7 @@ const createListItem = (inputURL, shortUrl) => {
     // Create short URL link element
     const link = document.createElement('a');
     link.innerText = shortUrl;
-    link.href = shortUrl;
+    link.href = inputURL;
     link.target = "_blank"
     listItem.appendChild(link);
 
@@ -62,7 +62,11 @@ const isValidURL = (url) => {
     // This regular expression checks for the general pattern of a valid URL (protocol://domain.tld/path?query=string#hash).
     // It's designed to match http, https, ftp protocols, and considers internationalized domain names and paths.
     // It does not work with all edge cases, but it's a good start.
+    // Regex by chat gpt 4
     const pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?(#[\w-]*)?(\?[^\s]*)?$/i;
+
+    // Recommendation by Arina Ehunova (https://hyperskill.org/projects/328/stages/1840/implement#comment)
+    //const pattern = /^(http(s)?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-.\/?%:#&=]*)?$/;
 
     // Test the URL against the regular expression pattern
     // todo After finish of last workout stage use better validation like URL constructor or url module of node.js !
@@ -82,7 +86,7 @@ const isValidURL = (url) => {
 const createShortURL = (inputUrl) => {
     console.info(`createShortUrl() called with inputUrl: ${inputUrl}`);
 
-    return `http://localhost/${generateRandomString(5)}`;
+    return `localhost/${generateRandomString(5)}`;
 };
 
 /**
