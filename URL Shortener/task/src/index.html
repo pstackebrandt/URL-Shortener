@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>URL Shortener</title>
-
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-<h1>URL Shortener</h1>
-<div>
-    <input type="text" id="input-url" placeholder="Enter a url">
-    <button id="button-create">Create</button>
-    <p id="errorViewer_invalidURL">Please enter a valid url</p>
-</div>
-<div>
-    <ol id="list-url"></ol>
-</div>
+    <h1>URL Shortener</h1>
+    <div>
+        <label for="input-url">Enter a URL:</label>
+        <input type="text" id="input-url" placeholder="Enter a url">
+        <button id="button-create">Create</button>
+        <p id="errorViewer_invalidURL">Please enter a valid url</p>
+    </div>
+    <div>
+        <ol id="list-url"></ol>
+    </div>
 </body>
+
 </html>

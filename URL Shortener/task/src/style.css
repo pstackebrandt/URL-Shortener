@@ -1,0 +1,76 @@
+body {
+    width: 100vw;
+
+/ / flex-container display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: azure;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    margin: 1vh 2vw;
+    padding: 1vh 1vw;
+}
+
+h1 {
+    text-align: center;
+    color: #0077cc;
+}
+
+label {
+    display: block;
+    margin: 2vh 2vw 0;
+    padding: 1vh 1vw 0;
+}
+
+input[type="text"] {
+    width: 90vw;
+    padding: 1vh 1vw;
+    margin: 2vh 2vw;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 0.1vh solid #ccc;
+}
+
+button {
+    display: block;
+    margin: 2vh auto;
+    padding: 1vh 2vh;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #0077cc;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005ca3;
+}
+
+ol {
+    padding: 2vh 2vw 0;
+    margin: 2vh 2vw;
+}
+
+li {
+    margin-bottom: 1vh;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #0077cc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#errorViewer_invalidURL {
+    color: red;
+}
