@@ -20,35 +20,55 @@ const provideShortURL = () => {
     }
 
     const shortURL = createShortURL(inputUrl);
-    const shortURLListItem = createListItem(inputUrl, shortURL);
+    const shortURLListItem = createShortUrlListItem(inputUrl, shortURL);
 
     // Append the list item to the list
     document.getElementById('list-url').appendChild(shortURLListItem);
 };
 
 /**
- * Creates and returns a list item element with a link to the short URL and the input URL
+ * Creates and returns a list item element with a link to the short URL, the input URL
+ * and a click counter.
  * @param {string} inputURL
  * @param {string} shortUrl
  * @returns list item element
  */
-const createListItem = (inputURL, shortUrl) => {
+const createShortUrlListItem = (inputURL, shortUrl) => {
     console.info('createListItem() called with inputURL: ' + inputURL + ' and shortUrl: ' + shortUrl);
-    const listItem = document.createElement('li');
 
-    // Create short URL link element
-    const link = document.createElement('a');
-    link.innerText = shortUrl;
-    link.href = inputURL;
-    link.target = "_blank"
-    listItem.appendChild(link);
+    const shortUrlListItem = document.createElement('li');
 
-    // Create text element with the input URL
-    const inputURLElement = document.createElement('span');
-    inputURLElement.innerText = ` - ${inputURL}`;
-    listItem.appendChild(inputURLElement);
+    // Create short URL shortUrlLink element
+    const shortUrlLink = document.createElement('a');
+    shortUrlLink.innerText = shortUrl;
+    shortUrlLink.href = inputURL;
+    // open link in new tab
+    shortUrlLink.target = '_blank';
+    shortUrlLink.dataset.clickCount = '0'; // click counter
+    shortUrlListItem.appendChild(shortUrlLink);
 
-    return listItem;
+    const inputURLSpan = document.createElement('span');
+    inputURLSpan.innerText = ` - ${inputURL}`;
+    shortUrlListItem.appendChild(inputURLSpan);
+
+    const clickCountSpan = document.createElement('span');
+    clickCountSpan.classList.add('click-count-view');
+    clickCountSpan.innerHTML = ` - Clicks: ${shortUrlLink.dataset.clickCount}`;
+    shortUrlListItem.appendChild(clickCountSpan);
+
+    // On link click increase click counter and it's view
+    shortUrlLink.addEventListener('click', function (event) {
+        // increment click counter
+        let clickCount = parseInt(this.dataset.clickCount, 10);
+        clickCount++;
+        this.dataset.clickCount = '' + clickCount;
+
+        // update the clickCountView
+        const clickCountView = this.parentElement.querySelector('span[class="click-count-view"]');
+        clickCountView.innerHTML = ` - Clicks: ${this.dataset.clickCount}`;
+    });
+
+    return shortUrlListItem;
 }
 
 /**
