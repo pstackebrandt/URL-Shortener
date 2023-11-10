@@ -42,19 +42,14 @@ const createShortUrlListItem = (inputURL, shortUrl) => {
     const shortUrlLink = document.createElement('a');
     shortUrlLink.innerText = shortUrl;
     shortUrlLink.href = inputURL;
-    // open link in new tab
-    shortUrlLink.target = '_blank';
+    shortUrlLink.target = '_blank'; // should open link in new tab, doesn't work in Chrome
     shortUrlLink.dataset.clickCount = '0'; // click counter
     shortUrlListItem.appendChild(shortUrlLink);
 
-    const inputURLSpan = document.createElement('span');
-    inputURLSpan.innerText = ` - ${inputURL}`;
-    shortUrlListItem.appendChild(inputURLSpan);
-
-    const clickCountSpan = document.createElement('span');
-    clickCountSpan.classList.add('click-count-view');
-    clickCountSpan.innerHTML = ` - Clicks: ${shortUrlLink.dataset.clickCount}`;
-    shortUrlListItem.appendChild(clickCountSpan);
+    const inputURLAndCounterSpan = document.createElement('span');
+    inputURLAndCounterSpan.classList.add('click-count-view');
+    inputURLAndCounterSpan.innerText = ` - ${inputURL} - Clicks: ${shortUrlLink.dataset.clickCount}`;
+    shortUrlListItem.appendChild(inputURLAndCounterSpan);
 
     // On link click increase click counter and it's view
     shortUrlLink.addEventListener('click', function (event) {
@@ -65,7 +60,10 @@ const createShortUrlListItem = (inputURL, shortUrl) => {
 
         // update the clickCountView
         const clickCountView = this.parentElement.querySelector('span[class="click-count-view"]');
-        clickCountView.innerHTML = ` - Clicks: ${this.dataset.clickCount}`;
+        let innerHTML = clickCountView.innerHTML;
+        // update the click count in the innerHTML
+        innerHTML = innerHTML.replace(/Clicks: \d+/, `Clicks: ${this.dataset.clickCount}`);
+        clickCountView.innerHTML = innerHTML;
     });
 
     return shortUrlListItem;
