@@ -1,5 +1,9 @@
 // file: script.js
-const debugShortener = false;
+const debugShortener = true;
+
+// debugShortener = true -> show dummy url in input field
+
+
 
 /**
  * Starts the creation of a short URL from a common URL and lists it on the page.
@@ -52,7 +56,7 @@ const createShortUrlListItem = (inputURL, shortUrl) => {
     shortUrlListItem.appendChild(inputURLAndCounterSpan);
 
     // On link click increase click counter and it's view
-    shortUrlLink.addEventListener('click', function (event) {
+    shortUrlLink.addEventListener('click', function () {
         // increment click counter
         let clickCount = parseInt(this.dataset.clickCount, 10);
         clickCount++;
@@ -128,27 +132,6 @@ const generateRandomString = (length) => {
     return result; // Return the generated string
 };
 
-// Event Listener, der auf den DOMContentLoaded Event wartet
-document.addEventListener("DOMContentLoaded", function () {
-    console.info('DOMContentLoaded event fired');
-
-    // Hide error message
-    hideElement('errorViewer_invalidURL');
-
-    // Button mit der ID 'button-create' selektieren
-    const buttonID = 'button-create';
-    let button = document.getElementById(buttonID);
-
-    // Klick Event Listener hinzufügen, der die createShortURL Funktion aufruft
-    button.addEventListener('click', provideShortURL);
-    console.info(`click event listener added for button with id: ${buttonID}`);
-
-    if (debugShortener) {
-        // Add url to input-url element
-        document.getElementById('input-url').value = 'https://www.google.com';
-    }
-});
-
 // Function to show an element by its ID
 const showElement = (elementId) => {
     const element = document.getElementById(elementId);
@@ -166,3 +149,32 @@ const hideElement = (elementId) => {
         element.style.display = 'none'; // Hide the element
     }
 };
+
+/**
+ * Event Listener. Will be called when the DOM is loaded.
+ * It configures the application:
+ * Setup functionality of Buttons 'create shortened url' and
+ * 'create shortened url' button.
+ * Hide error message.
+ * Show dummy url in input field in debug mode.
+ */
+document.addEventListener("DOMContentLoaded", function () {
+    console.info('DOMContentLoaded event fired');
+
+    // Hide error message
+    hideElement('errorViewer_invalidURL');
+
+    // Button mit der ID 'button-create' selektieren
+    const buttonID = 'button-create';
+    let button = document.getElementById(buttonID);
+
+    // Add a click event listener that starts the creation of a short URL
+    button.addEventListener('click', provideShortURL);
+    console.info(`click event listener added for button with id: ${buttonID}`);
+
+    if (debugShortener) {
+        // Add url to input-url element
+        document.getElementById('input-url').value = 'https://www.google.com';
+    }
+});
+
