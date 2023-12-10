@@ -4,7 +4,6 @@ const debugShortener = true;
 // debugShortener = true -> show dummy url in input field
 
 
-
 /**
  * Starts the creation of a short URL from a common URL and lists it on the page.
  * It will show an error message on the page if the URL is not valid.
@@ -151,10 +150,18 @@ const hideElement = (elementId) => {
 };
 
 /**
+ * Starts the deletion of one or more short URLs. *
+ */
+const deleteShortURL = () => {
+    console.info('deleteShortURL() called');
+};
+
+/**
+ * Setup Page
  * Event Listener. Will be called when the DOM is loaded.
  * It configures the application:
  * Setup functionality of Buttons 'create shortened url' and
- * 'create shortened url' button.
+ * 'delete shortened url' button.
  * Hide error message.
  * Show dummy url in input field in debug mode.
  */
@@ -164,17 +171,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hide error message
     hideElement('errorViewer_invalidURL');
 
-    // Button mit der ID 'button-create' selektieren
-    const buttonID = 'button-create';
-    let button = document.getElementById(buttonID);
+    // Add behavior for button to create short URL
+    let createUrlButton = document.getElementById('button-create');
+    createUrlButton.addEventListener('click', provideShortURL);
+    console.info(`Click event listener added for button to create short url.`);
 
-    // Add a click event listener that starts the creation of a short URL
-    button.addEventListener('click', provideShortURL);
-    console.info(`click event listener added for button with id: ${buttonID}`);
+    // Add behavior for button to delete short URL
+    let deleteUrlButton = document.getElementById('button-delete');
+    deleteUrlButton.addEventListener('click', deleteShortURL);
+    console.info(`Click event listener added for button to delete short url.`);
 
+    // Add url to input-url element
     if (debugShortener) {
-        // Add url to input-url element
         document.getElementById('input-url').value = 'https://www.google.com';
     }
 });
-
