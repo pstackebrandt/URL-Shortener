@@ -154,6 +154,11 @@ const hideElement = (elementId) => {
  */
 const deleteShortURL = () => {
     console.info('deleteShortURL() called');
+
+    // Get url from input field
+    // Get all list items
+    // if inputUrl is empty -> delete all list items
+    // if inputUrl is not empty -> delete all list items with inputUrl
 };
 
 /**
